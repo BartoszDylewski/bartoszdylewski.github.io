@@ -1,209 +1,145 @@
-/*
-	SCHOOL DRIVE
-	// DAMIAN SZEWCZYK
-	// WWW.DAMIANSZEWCZYK.PL
-	WSZELKIE PRAWA ZASTRZEŻONE
-*/
+// based on https://codepen.io/ellgine/pen/EjeXOZ
 
-a {
-	color: #63605b;
-	text-decoration: none;
+$colors: (
+    background: #1d1f20,
+    text: #eee
+);
+
+$font: (
+    family: sans-serif,
+    size: 24px,
+    letter-spacing: 0
+);
+
+$config: (
+    animated: false,
+    nb-letters: 16,
+    animation-length: 4s,
+    mask-letters: ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")
+);
+
+// ----------------------------------
+
+@function color($value) {
+    @return map-get($colors, $value);
 }
 
-a:hover {
-	color: #555;
-	text-decoration: underline;
+@function font($value) {
+    @return map-get($font, $value);
 }
+
+@function config($value) {
+    @return map-get($config, $value);
+}
+
+@function random-string($list) {
+    $result: null;
+    @for $i from 1 through length($list) {
+        $random: random(length($list));
+        $current: nth($list, $random);
+        $list: remove-nth($list, $random);
+        $result: $result#{$current};
+    }
+    @return $result;
+}
+
+@function remove-nth($list, $index) {
+    $result: ();
+    @for $i from 1 through length($list) {
+        @if $i != $index {
+            $result: append($result, nth($list, $i));
+        }
+    }
+    @return $result;
+}
+
+@mixin respond-to($breakpoint) {
+    @if type-of($breakpoint) == list {
+        @media (min-width: nth($breakpoint, 1)) and (max-width: nth($breakpoint, 2)) {
+            @content;
+        }
+    }
+    @else {
+        @media (max-width: $breakpoint) {
+            @content;
+        }
+    }
+}
+
+// ----------------------------------
 
 body {
-	font-family: Tahoma, Verdana, sans-serif;
-	font-size: 11px;
-	color: #64615C;
-	text-align: center;
-	line-height: 20px;
+    text-align: center;
+    background-color: color(background);
 }
 
-#container {
-	width: 1000px;
-	margin: 0 auto;
-	text-align: left;
-}
-
-img {
-	border: none;
-}
-
-#header_logo {
-	float: left;
-	margin: 40px 20px 10px 20px;
-}
-
-#header_menu {
-	float: left;
-	height: 60px;
-	width: 1000px;
-	background: #B3AAA1;
-	border-top: 4px solid #276AEC;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	-moz-border-radius-bottomleft: 20px;
-	-moz-border-radius-bottomright: 20px;
-}
-
-#header_menu ul {
-	list-style: none;
-	margin: 0;
-	padding: 0px 0px 0px 0px;
-}
-
-#header_menu li {
-	display: block;
-	float: left;
-	margin: 5px 10px 10px 10px;	
-}
-
-#header_menu a {
-	margin: 10px 5px 15px 10px;
-	padding: 5px;
-	color: #ffffff;
-	display: block;
-	text-decoration: none;
-	text-transform: uppercase;
-	font-size: 13px;
-	font-weight: bold;
-	text-shadow: #000 0px 1px 3px;
-}
-
-#header_menu a:hover {
-	background: #928D7E;
-	filter:alpha(opacity=50);
-	opacity: 0.5;
-	-moz-opacity:0.5;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-}
-
-#header_left_top_info {
-	width: 390px;
-	float: right;
-	background: #EDEAE1 url(../images/bg_top_right_s.jpg) no-repeat top;
-	padding: 10px 40px 10px 40px;
-	margin-top: 20px;
-}
-
-#header_left_top_info a {
-	font-weight: bold;
-}
-
-#header_main {
-	width: 1000px;
-	height: 250px;
-	float: left;
-}
-
-#header_main_text {
-	width: 390px;
-	height: 230px;
-	float: right;
-	background: #EDEAE1;
-	margin-top: 2px;
-	padding: 10px 40px 10px 40px;
-}
-
-h2 {
-	color: #276AEC;
-	font-weight: normal;
+.wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    font-size: 0;
+    transform: translate(-50%);
 }
 
 p {
-	color: #64615C;
-	line-height: 20px;
+    font-family: font(family);
+    font-size: 14px;
+    font-weight: 500;
+    color: color(text);
+    opacity: 0.3;
 }
 
-#header_main_text a {
-	color: #feae31;
-	text-decoration: none;
-	padding-left: 5px;
+.letter {
+    width: font(size);
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    overflow: hidden;
+    margin: 0 ceil(font(letter-spacing) / 2);
+    font-family: font(family);
+    font-size: font(size);
+    font-weight: 600;
+    line-height: font(size);
+    text-transform: uppercase;
+    color: color(text);
+    @include respond-to(625px) {
+        //font-size: 16px;
+        //width: 18px;
+    }
+    &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        word-break: break-all;
+        background-color: color(background);
+    }
 }
 
-#header_main_text a:hover {
-	text-decoration: underline;
-}
+// ----------------------------------
 
-#header_main_image {
-	float: left;
-	background: url(../images/bg_header_car.jpg);
-	width: 530px;
-	height: 250px;
+@for $i from 1 through config(nb-letters) {
+    $length: length(config(mask-letters));
+    $random: random($length);
+    $steps: $random - 1;
+    $offset: font(size) * $steps * -1;
+    $delay: random(100) / 100;
+      $duration: $steps * (config(animation-length) / $random);
+    .letter:nth-child(#{$i}):before {
+        content: quote(random-string(config(mask-letters)));
+        margin-top: $offset;
+        animation-name: letter#{$i};
+        animation-duration: $duration - ($duration * $delay);
+        animation-delay: $delay * 1s;
+        animation-fill-mode: forwards;
+    }
+    @keyframes letter#{$i} {
+        from {
+            margin-top: $offset;
+        }
+        to {
+            margin-top: font(size);
+        }
+    }
 }
-
-#boxy {
-	width: 920px;
-	float: left;
-	line-height: 18px;
-	background: #EDEAE1;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	border-top-left-radius: 20px;
-	-moz-border-radius-bottomleft: 20px;
-	-moz-border-radius-bottomright: 20px;
-	-moz-border-radius-topleft: 20px;
-	padding: 15px 40px 15px 40px;
-}
-
-#boxy a {
-	padding: 5px;
-}
-
-#boxy a:hover {
-	background: #2A3333;
-	color: #ddd;
-}
-
-#boxy_text_1 {
-	float: left;
-	width: 320px;
-}
-
-#boxy_images {
-	float: left;
-	margin-left: 30px;
-}
-
-#boxy_images img {
-	padding-left: 30px;
-}
-
-.margin_l10 {
-	margin-left: 10px;
-}
-
-.margin_l40 {
-	margin-left: 40px;
-}
-
-#boxy_content {
-	width: 920px;
-	float: left;
-	padding: 5px 40px 5px 40px;
-	margin-top: 30px;
-}
-
-#boxy_content_lx {
-	width: 280px;
-	float: left;
-}
-
-#footer {
-	width: 920px;
-	float: left;
-	background: #B4ABA2;
-	padding: 5px 40px 5px 40px;
-	margin-top: 30px;
-	color: #ddd;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	-moz-border-radius-bottomleft: 20px;
-	-moz-border-radius-bottomright: 20px;
-}
-	

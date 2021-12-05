@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+  <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+  <!-- To use social readers via microsub, follow these steps.
+    (Details: https://indieweb.org/Microsub#Getting_Started)
+    1. After publishing this to your domain, sign in to https://aperture.p3k.io/login with your domain
+    2. You will see a <link> tag displayed on your dashboard that looks like:
+      <link rel="microsub" href="https://aperture.p3k.io/microsub/000">
+    3. Copy that <link> tag and paste it after this HTML comment.
+    4. Publish the updated page!
+   -->
+  <title>ejbtrd.pl</title>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      html { background-color: #111111; color: #fbfbfb; }
+      a { color: #ca8465; }
+    }
+    body {
+      line-height: 1.6;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+      text-align: center;
+      margin: 1rem auto;
+      min-height: 90vh;
+      max-width: 40vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    @media screen and (max-width: 700px) {
+      body { max-width: 90vw; }
+    }
+    .box { padding: 0.5em; }
+    img.u-photo { border-radius: 50%; }
+    ul { padding: 0; list-style: none; }
+    li { margin: 0.3em; }
+    #ul-row li { display: inline; }
+    #devices > span { white-space:nowrap; }
+  </style>
+</head>
+
+<body>
+  <!-- Reference for representative h-card properties: https://microformats.org/wiki/h-card -->
+  <main class="h-card" rel="author">
+    <img class="u-photo" alt="ponczek" src="https://avatars.githubusercontent.com/u/34240873?v=4" />
+
+    <h1>
+      I'm <span class="p-name txt-rotate" data-rotate='[ "Bartłomiej Rudecki.", "ejbtrd." ]'></span>
+    </h1>
+
+    <div class="box">
+        <p class="p-note">...and I do some stuff i guess?</p>
+
+        <ul id="ul-row">
+        <li><a class="u-url" href="https://github.com/ejbtrd" rel="me">GitHub</a></li>
+        <li><a class="u-url" href="https://twitter.com/ejbtrd" rel="me">Twitter</a></li>
+        <li><a class="u-url" href="https://t.me/ejbtrd" rel="me">Telegram</a></li>
+        <li><a class="u-url" href="https://discordapp.com/users/337640243266322433" rel="me">Discord</a></li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>My devices:</h2>
+        <p id="devices"><span>Mi 10T (apollo),</span> <span>Mi 9T Pro (raphael),</span> <span>Mi Mix 2s (polaris)</span></p>
+    </div>
+
+    <div class="box">
+        <h2>Donate:</h2>
+        <form action="https://www.paypal.com/donate" method="post" target="_top">
+                <input type="hidden" name="hosted_button_id" value="PVZG5PJY36E3C" />
+                <input type="image" src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                <img alt="" border="0" src="https://www.paypal.com/en_PL/i/scr/pixel.gif" width="1" height="1" />
+        </form>
+    </div>
+  </main>
+  <script data-ad-client="ca-pub-5441293950856191" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script src="animation.js"></script>
+</body>
+
+</html>

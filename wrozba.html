@@ -1,4 +1,5 @@
 
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +7,6 @@
     <title>Wyrocznia Ekonoma</title>
     <style>
         :root {
-            /* Kolory ZSEiO / Ekonomika - granat, błękit i złoto */
             --primary-color: #004e92;
             --secondary-color: #000428;
             --accent-color: #ffd700;
@@ -16,14 +16,17 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            height: 100vh;
+            /* ZMIANA: min-height zamiast height i usunięcie blokady scrollowania */
+            min-height: 100vh;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             color: var(--text-color);
-            overflow: hidden;
             position: relative;
+            /* ZMIANA: Przywrócenie domyślnego zachowania przewijania */
+            overflow-y: auto; 
+            overscroll-behavior-y: auto;
         }
 
         /* Tło z delikatnym napisem */
@@ -33,8 +36,12 @@
             font-size: 15rem;
             color: rgba(255, 255, 255, 0.03);
             font-weight: bold;
-            z-index: 0;
+            z-index: -1; /* Ustawienie pod spodem */
             transform: rotate(-30deg);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            pointer-events: none; /* Żeby napis nie blokował dotyku */
         }
 
         .container {
@@ -48,6 +55,7 @@
             position: relative;
             z-index: 1;
             border: 2px solid var(--accent-color);
+            margin: 20px 0; /* Margines, żeby na małych ekranach nie dotykało krawędzi */
         }
 
         h1 {
@@ -91,12 +99,27 @@
             margin-bottom: 10px;
             animation: pulse 3s infinite ease-in-out;
             text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            cursor: pointer; /* Kursor rączki */
+            user-select: none;
+        }
+        
+        /* Efekt kliknięcia na ikonę */
+        .icon:active {
+            transform: scale(0.9);
         }
 
         .footer-note {
-            margin-top: 30px;
+            margin-top: 20px;
             font-size: 0.75rem;
-            color: #888;
+            color: #999;
+        }
+
+        .su-signature {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            letter-spacing: 0.5px;
         }
 
         /* Animacje */
@@ -115,19 +138,18 @@
 <body>
 
     <div class="container">
-        <span class="icon">🔮</span>
+        <span class="icon" onclick="window.location.reload()">🔮</span>
         <h1>Wyrocznia Ekonoma</h1>
         <p class="subtitle">Magia przemawia...</p>
         
         <div class="fortune-box" id="fortune-display">
-            Łączenie z serwerem w klasie 17...
+            Łączenie z serwerem szkolnym...
         </div>
 
-        <div class="footer-note">Nie pasuje wróżba? Odśwież stronę (F5), aby wylosować i oszukać przeznaczenie.</div>
+        <div class="footer-note">Nie pasuje wróżba? Pociągnij ekran w dół lub kliknij w kulę. Może uda się oszukać przeznaczenie?</div>
+        
+        <div class="su-signature">Mamy nadzieję, że się spełni, SU :)</div>
     </div>
-
-    <div class="su-signature">Mamy nadzieję, że się spełni. Pozdrowionka od SU :)</div>
-</div>
 
     <script>
         const wrozby = [
@@ -203,13 +225,10 @@
         window.onload = function() {
             const display = document.getElementById('fortune-display');
             
-            // Losowanie
             const index = Math.floor(Math.random() * wrozby.length);
             
-            // Efekt ładowania
             setTimeout(() => {
                 display.innerText = wrozby[index];
-                // Złota ramka po załadowaniu
                 display.style.borderColor = "#ffd700";
             }, 600);
         };

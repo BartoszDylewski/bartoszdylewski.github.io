@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -6,10 +6,10 @@
     <title>Wyrocznia Ekonoma</title>
     <style>
         :root {
-            /* Kolory dopasowane bardziej pod granat/błękit (częste w szkołach) */
+            /* Kolory ZSEiO / Ekonomika - granat, błękit i złoto */
             --primary-color: #004e92;
             --secondary-color: #000428;
-            --accent-color: #ffd700; /* Złoty akcent */
+            --accent-color: #ffd700;
             --text-color: #333;
         }
 
@@ -26,7 +26,7 @@
             position: relative;
         }
 
-        /* Tło z delikatnymi elementami (opcjonalne) */
+        /* Tło z delikatnym napisem */
         body::before {
             content: "ZSEiO";
             position: absolute;
@@ -68,7 +68,7 @@
         }
 
         .fortune-box {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 600;
             min-height: 120px;
             display: flex;
@@ -79,7 +79,7 @@
             line-height: 1.5;
             opacity: 0;
             animation: fadeIn 1.5s forwards;
-            padding: 10px;
+            padding: 15px;
             background-color: #f8f9fa;
             border-radius: 10px;
             border-left: 5px solid var(--accent-color);
@@ -90,6 +90,7 @@
             display: block;
             margin-bottom: 10px;
             animation: pulse 3s infinite ease-in-out;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
         }
 
         .footer-note {
@@ -98,10 +99,11 @@
             color: #888;
         }
 
+        /* Animacje */
         @keyframes pulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5)); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5)); }
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(138, 43, 226, 0.5)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.9)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(138, 43, 226, 0.5)); }
         }
 
         @keyframes fadeIn {
@@ -113,88 +115,89 @@
 <body>
 
     <div class="container">
-        <span class="icon">🎓</span>
+        <span class="icon">🔮</span>
         <h1>Wyrocznia Ekonoma</h1>
         <p class="subtitle">Magia przemawia...</p>
         
         <div class="fortune-box" id="fortune-display">
-            Łączenie z serwerem CKE...
+            Łączenie z serwerem w klasie 17...
         </div>
 
-        <div class="footer-note">Nie pasuje wróżba? Odśwież stronę, aby oszukać przeznaczenie.</div>
+        <div class="footer-note">Nie pasuje wróżba? Odśwież stronę (F5), aby wylosować i oszukać przeznaczenie.</div>
     </div>
+
+    <div class="su-signature">Mamy nadzieję, że się spełni. Pozdrowionka od SU :)</div>
+</div>
 
     <script>
         const wrozby = [
-            // --- ZSEiO & ELBLĄG ---
+            // --- EKONOMISTA I RACHUNKOWOŚĆ ---
+            "Twoje 'Winien' i 'Ma' zejdą się w idealnej harmonii, ale dopiero za trzecim razem.",
+            "Uważaj, bo dzisiaj zaksięgujesz swoje emocje na złym koncie.",
+            "Bilans wyjdzie na zero, ale tylko jeśli przestaniesz myśleć o weekendzie.",
+            "Ustawa o rachunkowości będzie Ci się śniła po nocach, ale to dobry znak.",
+            "Błąd w Excelu, którego szukasz, jest w komórce A1. Zaufaj mi.",
+            "Twój bilans w końcu wyjdzie na zero. Aktywa = Pasywa. Cud!",
+
+            // --- LOGISTYKA I SPEDYCJA ---
+            "Czas pracy kierowcy w Twoim zadaniu egzaminacyjnym nie zostanie przekroczony.",
+            "Europaleta stanie się Twoim talizmanem szczęścia.",
+            "Formułowanie jednostki ładunkowej pójdzie Ci lepiej niż układanie życia osobistego.",
+            "List przewozowy CMR wypełnisz bezbłędnie, nawet z zamkniętymi oczami.",
+            "Uważaj na zadania z optymalizacji transportu – najkrótsza droga nie zawsze jest najszybsza.",
+            "Magazyn wysokiego składowania przyśnii Ci się w kolorach.",
+            "Paleta w zadaniu logistycznym ułoży się idealnie.",
+
+            // --- REKLAMA I GRAFIKA ---
+            "Twój projekt w Canvie zachwyci nauczyciela, mimo że zrobiłeś go w 5 minut.",
+            "Nie myl CMYK z RGB, bo czeka Cię towarzyska wpadka.",
+            "Hasło reklamowe, które wymyślisz na kolanie, okaże się genialne.",
+            "Adobe Photoshop nie wykrzaczy się dzisiaj ani razu. To cud.",
+            "Twoja grupa docelowa dzisiaj Cię kocha. Korzystaj z tego.",
+            "Twoja kampania reklamowa na egzaminie zachwyci wirtualnego klienta.",
+
+            // --- ELBLĄG I OKOLICE ---
+            "Spotkasz miłość swojego życia w CH Ogrody, ale będzie stała w innej kolejce.",
+            "Tramwaj numer 4 przyjedzie punktualnie co do sekundy.",
+            "Spacer po Bażantarni oczyści Twój umysł przed jutrzejszą kartkówką.",
+            "Wiatr od Zalewu przywieje Ci genialny pomysł na wypracowanie.",
+            "Unikaj tłumów na Starym Mieście, ktoś może zapytać o pożyczenie notatek.",
+            "Twoja podróż elbląską komunikacją miejską dostarczy Ci niezapomnianych wrażeń.",
             "Tramwaj, na który biegniesz po lekcjach, odjedzie równo z dzwonkiem.",
+            "Wyjdziesz ze szkoły i poczujesz ten specyficzny elbląski wiatr zmian.",
+
+            // --- ZSEiO / ULICA BEMA ---
+            "Panie w sekretariacie będą miały dla Ciebie wyjątkowo dobrą wiadomość.",
             "Twoja droga na Bema będzie dziś wyjątkowo bezkorkowa.",
-            "Wuefista w końcu uwierzy, że naprawdę zapomniałeś stroju.",
-            "Spotkasz kogoś znajomego w drodze do Społem na przerwie.",
-            "Ogrzewanie w sali będzie działać z mocą słońca, ubierz się na cebulkę.",
             "Uważaj na schodach – grawitacja na Bema działa dzisiaj ze zdwojoną siłą.",
             "Dziś jest dzień, w którym automat z kawą nie połknie Twoich drobnych.",
-            "Twoja frekwencja magicznie się poprawi w dzienniku elektronicznym.",
-            "Wyjdziesz ze szkoły i poczujesz ten specyficzny elbląski wiatr zmian.",
-            "Twoje 'Winien' i 'Ma' zejdą się w idealnej harmonii, ale dopiero za trzecim razem.",
-    "Uważaj, bo dzisiaj zaksięgujesz swoje emocje na złym koncie.",
-    "Bilans wyjdzie na zero, ale tylko jeśli przestaniesz myśleć o weekendzie.",
-    "Ustawa o rachunkowości będzie Ci się śniła po nocach, ale to dobry znak.",
-    "Błąd w Excelu, którego szukasz, jest w komórce A1. Zaufaj mi.",
-            "Spotkasz miłość swojego życia w Ogrodach, ale będzie stała w innej kolejce.",
-    "Tramwaj numer 5 przyjedzie punktualnie co do sekundy.",
-    "Spacer po Bażantarni oczyści Twój umysł przed jutrzejszą kartkówką.",
-    "Twoja podróż elbląską komunikacją miejską dostarczy Ci niezapomnianych wrażeń.",
-            "Kula mówi, że ucieknie Ci tramwaj, ale jak to mówią "jak kocha to poczeka""
+            "Kawa ze szkolnego automatu smakuje dziś jak napój bogów (prawie).",
 
-            // --- EGZAMINY ZAWODOWE (OGÓLNE I PROFILOWE) ---
-            "Na egzaminie zawodowym trafisz na zadanie, które robiliście wczoraj.",
+            // --- EGZAMINY ZAWODOWE I NAUKA ---
             "Klucz odpowiedzi CKE będzie dla Ciebie łaskawy.",
-            "Twój bilans w końcu wyjdzie na zero. Aktywa = Pasywa. Cud!",
             "Egzamin praktyczny zdasz na 75%. Idealnie na styk, ale zdane!",
             "Komisja egzaminacyjna nie zauważy, że ręce Ci się trzęsą przy klawiaturze.",
             "System egzaminacyjny się zawiesi, ale Twoje odpowiedzi zostaną zapisane.",
             "Na teorii zaznaczysz 'B' i to będzie jedyna słuszna droga.",
-            "Paleta w zadaniu logistycznym ułoży się idealnie.",
-            "Twoja kampania reklamowa na egzaminie zachwyci wirtualnego klienta.",
-            "Program nie wyrzuci błędu w trakcie kompilacji na egzaminie. To rzadkość!",
             "Zadanie z Excela rozwiążesz szybciej niż myślisz.",
             "Nie bój się egzaminu ustnego. Egzaminator też człowiek, też chce iść do domu.",
-
-            // --- NAUKA I MATURA ---
             "Matematyka przestanie być czarną magią dokładnie na 45 minut.",
             "Unikaj wzroku nauczyciela od przedmiotów zawodowych. Dziś 'pyta'.",
-            "Twoja rozprawka będzie tak laniem wody, że aż temat popłynie, ale zdasz.",
-            "Lektura, której streszczenie przeczytasz 5 minut przed lekcją, będzie na kartkówce.",
-            "Dostaniesz 5 z przedmiotu, którego nazwy nawet nie potrafisz wymówić.",
-            "Twoja prezentacja w PowerPoincie odpali się za pierwszym razem.",
-               "Automat z batonami wyda Ci dwa zamiast jednego. To Twój szczęśliwy dzień.",
-    "Dziś na lekcji usłyszysz swoje nazwisko. Bądź w gotowości.",
-    "Kawa ze szkolnego automatu smakuje dziś jak napój bogów (prawie).",
-    "Zagrożenie z przedmiotu zawodowego zniknie szybciej, niż się pojawiło.",
-    "Nie pytaj, co szkoła może zrobić dla Ciebie, pytaj, czy dzwonek już zadzwonił.",
-    "Twoja intuicja podpowiada: 'zrób ściągę', ale rozsądek mówi: 'i tak nie zdążysz'.",
-    "Jutrzejsze zastępstwo uratuje Ci życie.",
-    "Zostaw ten telefon pod ławką, nauczyciel ma oczy dookoła głowy.",
-    "Temat na polskim będzie o Lwowie albo o miłości. Przygotuj się na cierpienie.",
-    "Dziś zrozumiesz funkcje trygonometryczne. Albo przynajmniej udasz, że rozumiesz.",
-             "Twój projekt w Corelu zachwyci nauczyciela, mimo że zrobiłeś go w 5 minut.",
-            "Uważaj na zadania z optymalizacji transportu – najkrótsza droga nie zawsze jest najszybsza.",
-"Europaleta stanie się Twoim talizmanem szczęścia.",
-    "Formułowanie jednostki ładunkowej pójdzie Ci lepiej niż układanie życia osobistego.",
-            
-            // --- ŻYCIE UCZNIA ---
+
+            // --- ŻYCIE UCZNIA I PRZETRWANIE ---
+            "Automat z batonami wyda Ci dwa zamiast jednego. To Twój szczęśliwy dzień.",
+            "Dziś na lekcji usłyszysz swoje nazwisko. Bądź w gotowości.",
+            "Zagrożenie z przedmiotu zawodowego zniknie szybciej, niż się pojawiło.",
+            "Nie pytaj, co szkoła może zrobić dla Ciebie, pytaj, czy dzwonek już zadzwonił.",
+            "Twoja intuicja podpowiada: 'zrób ściągę', ale rozsądek mówi: 'i tak nie zdążysz'.",
+            "Jutrzejsze zastępstwo uratuje Ci życie.",
+            "Zostaw ten telefon pod ławką, nauczyciel ma oczy dookoła głowy.",
+            "Temat na polskim będzie o Lwowie albo o miłości. Przygotuj się na cierpienie.",
+            "Dziś zrozumiesz funkcje trygonometryczne. Albo przynajmniej udasz, że rozumiesz.",
             "Kanapka z plecaka smakuje dziś lepiej niż kebab na mieście.",
-            "Znajdziesz długopis, który zgubiłeś w pierwszej klasie.",
-            "Ktoś z innej klasy uśmiechnie się do Ciebie na korytarzu.",
             "Twoja bateria w telefonie wytrzyma do końca lekcji. Szok.",
-            "Dziś jest dobry dzień, żeby zgłosić nieprzygotowanie. Gwiazdy dają zielone światło.",
-            "Unikaj podejrzanych linków na grupie klasowej.",
             "Weekend zacznie się dla Ciebie mentalnie już w czwartek.",
-            "Ktoś pożyczy od Ciebie kartkę i faktycznie ją odda.",
-            "Uważaj na 'darmowe' punkty na sprawdzianie. To pułapka.",
-            "Wychowawca zapomni sprawdzić usprawiedliwienia.",
-            "Zrozumiesz o co chodzi w podatkach. Przez chwilę."
+            "Wychowawca zapomni sprawdzić usprawiedliwienia."
         ];
 
         window.onload = function() {
@@ -206,7 +209,7 @@
             // Efekt ładowania
             setTimeout(() => {
                 display.innerText = wrozby[index];
-                // Dodatkowy efekt wizualny po załadowaniu tekstu
+                // Złota ramka po załadowaniu
                 display.style.borderColor = "#ffd700";
             }, 600);
         };
@@ -214,3 +217,4 @@
 
 </body>
 </html>
+

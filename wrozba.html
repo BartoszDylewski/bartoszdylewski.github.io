@@ -1,92 +1,92 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Szkolna Wyrocznia</title>
+    <title>Twoja Wróżba na Dziś</title>
     <style>
         :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
+            --primary-color: #4e54c8;
+            --secondary-color: #8f94fb;
             --text-color: #333;
-            --bg-color: #f4f4f9;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: linear-gradient(to left, #8f94fb, #4e54c8);
             height: 100vh;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             color: var(--text-color);
+            overflow: hidden;
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             text-align: center;
-            max-width: 500px;
-            width: 90%;
-            transition: transform 0.3s ease;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
+            max-width: 600px;
+            width: 85%;
+            position: relative;
         }
 
         h1 {
             color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
         }
 
         .fortune-box {
-            font-size: 1.4rem;
-            font-weight: 500;
-            min-height: 120px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            min-height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            border-left: 5px solid var(--secondary-color);
-            background-color: #f8f9fa;
-            border-radius: 0 10px 10px 0;
-            line-height: 1.6;
-        }
-
-        button {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.6);
-        }
-
-        button:active {
-            transform: scale(0.95);
+            margin: 20px 0;
+            color: #2c3e50;
+            line-height: 1.5;
+            opacity: 0; /* Start hidden for animation */
+            animation: fadeIn 2s forwards;
         }
 
         .icon {
-            font-size: 3rem;
-            margin-bottom: 10px;
+            font-size: 4rem;
             display: block;
+            margin-bottom: 10px;
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Animacje */
+        @keyframes pulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(143, 148, 251, 0.5)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(143, 148, 251, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(143, 148, 251, 0.5)); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -94,64 +94,93 @@
 
     <div class="container">
         <span class="icon">🔮</span>
-        <h1>Szkolna Wyrocznia</h1>
+        <h1>Co mówi wszechświat?</h1>
+        <p class="subtitle">Twoja losowa przepowiednia na ten moment</p>
         
         <div class="fortune-box" id="fortune-display">
-            Łączenie z kosmosu...
+            Ładowanie aury...
         </div>
 
-        <button onclick="generujWrozbe()">Wylosuj nową wróżbę</button>
+        <div class="footer-note">Nie podoba się? Odśwież stronę, by spróbować oszukać przeznaczenie.</div>
     </div>
 
     <script>
-        // Baza wróżb dla ucznia
+        // OGROMNA BAZA WRÓŻB (Szkoła, Życie, Miłość, Absurd)
         const wrozby = [
-            "Na najbliższej kartkówce trafisz na jedyne pytanie, na które znasz odpowiedź.",
-            "Twoja wiedza o lekturach przyda się w najmniej oczekiwanym momencie.",
-            "Matura ustna pójdzie gładko, pod warunkiem, że nie pomylisz Wokulskiego z Wojskim.",
-            "Unikaj wzroku nauczyciela od fizyki w czwartek. Gwiazdy mówią: 'odpytywanie'.",
-            "W sklepiku szkolnym czeka na Ciebie ostatnia dobra drożdżówka.",
-            "Ktoś, kto Ci się podoba, pożyczy od Ciebie długopis. Nie zmarnuj tej szansy!",
-            "Zadanie domowe, którego nie zrobisz, nie będzie sprawdzane. Szczęście sprzyja odważnym.",
-            "Twoja intuicja na teście wyboru będzie dzisiaj bezbłędna. Zaufaj 'C'.",
-            "Nauczyciel od matematyki będzie miał wyjątkowo dobry humor. To czas na negocjacje ocen.",
-            "Znajdziesz 5 złotych na korytarzu, ale automat do kawy je połknie.",
-            "Temat Twojej rozprawki maturalnej będzie dokładnie taki, jakiego pragniesz.",
-            "Uważaj na lekcji WF-u – piłka ma dzisiaj do Ciebie osobisty uraz.",
-            "Dostaniesz '5' za aktywność, mimo że powiesz tylko jedno zdanie.",
-            "Twoja frekwencja w tym miesiącu magicznie się poprawi.",
-            "Jutro jest idealny dzień, żeby zgłosić nieprzygotowanie. Gwiazdy dają zielone światło.",
-            "Zrozumiesz temat z chemii, który dręczył Cię od dwóch lat. Olśnienie nadejdzie pod prysznicem.",
-            "Nie bój się matury z polskiego. Mickiewicz czuwa nad Tobą.",
-            "Wkrótce odkryjesz w plecaku kanapkę, o której zapomniałeś tydzień temu. Nie jedz jej.",
-            "Spóźnisz się na pierwszą lekcję, ale nauczyciel spóźni się jeszcze bardziej.",
-            "Twoja prezentacja w PowerPoincie zadziała bez żadnych problemów technicznych. Cud!"
+            // SZKOŁA I MATURA
+            "Temat Twojej matury ustnej będzie banalnie prosty.",
+            "Nauczyciel, którego się boisz, zachoruje w dniu sprawdzianu.",
+            "Twoja wiedza z lektur okaże się zbędna, ale memy o nich uratują Ci życie towarzyskie.",
+            "Dostaniesz 30% na teście, strzelając. Czysty fart.",
+            "Zapomnisz pracy domowej, ale nauczyciel zapomni ją sprawdzić.",
+            "Nie przejmuj się ocenami, za 5 lat nikt o nie nie zapyta.",
+            "Wuefista w końcu doceni Twoje starania (albo przynajmniej obecność).",
+            "To, czego uczysz się teraz na pamięć, przyda Ci się tylko w teleturnieju.",
+            "Zdasz maturę z matematyki. Serio. Nie panikuj.",
+            "Unikaj pierwszej ławki w przyszły wtorek.",
+            
+            // RELACJE I MIŁOŚĆ
+            "Twój crush w końcu zauważy Twoją nową fryzurę.",
+            "Ktoś obserwuje Twoje relacje na Instagramie częściej niż myślisz.",
+            "Unikaj toksycznych ludzi, szczególnie tych, którzy nie lubią pizzy.",
+            "Wkrótce poznasz kogoś, kto ma tak samo dziwne poczucie humoru jak Ty.",
+            "Stara przyjaźń zostanie wystawiona na próbę, ale wyjdziecie z tego silniejsi.",
+            "Nie pisz do byłej/byłego. Po prostu nie. Odłóż telefon.",
+            "Ktoś planuje zaprosić Cię na studniówkę (lub randkę), ale zbiera się na odwagę.",
+            "Twoja sarkastyczna uwaga zostanie źle zrozumiana. Uważaj na słowa.",
+            
+            // ŻYCIE I SZCZĘŚCIE
+            "Znajdziesz zapomnianą dychę w kieszeni zimowej kurtki.",
+            "Jutrzejszy obiad będzie najlepszym posiłkiem tego tygodnia.",
+            "Twoja paczka z internetu przyjdzie dzień wcześniej.",
+            "Uważaj na kałuże. Jedna z nich jest głębsza niż wygląda.",
+            "To jest idealny moment, żeby zacząć ten serial, który wszyscy polecają.",
+            "Twój telefon rozładuje się w krytycznym momencie. Noś powerbanka.",
+            "Zrób sobie drzemkę. To najlepsza decyzja na dziś.",
+            "Wyjdziesz z domu i uświadomisz sobie, że wyglądasz świetnie.",
+            "Ktoś zrobi Ci zdjęcie z ukrycia i wyjdziesz na nim jak ziemniak. Trudno.",
+            "Czeka Cię nagły przypływ gotówki od babci.",
+            
+            // DECYZJE I PRZYSZŁOŚĆ
+            "Jeśli wahasz się między A i B – wybierz C.",
+            "Nie odkładaj tego na jutro. Jutrzejszy Ty będzie Ci wdzięczny.",
+            "Twoja intuicja działa dziś bezbłędnie. Słuchaj jej.",
+            "Zmiana, której się boisz, wyjdzie Ci na dobre.",
+            "Za rok będziesz śmiać się z tego, co dziś jest Twoim największym problemem.",
+            "To nie jest dobry dzień na eksperymenty z włosami.",
+            "Wyśpij się. Świat wygląda lepiej po 8 godzinach snu.",
+            "Planowanie przyszłości jest super, ale pamiętaj o zjedzeniu śniadania.",
+            
+            // ABSURDALNE I ZABAWNE
+            "Twoim zwierzęciem duchowym na ten tydzień jest leniwiec.",
+            "Uważaj na gołębie. Patrzą podejrzanie.",
+            "Gwiazdy mówią, że powinieneś zamówić kebaba.",
+            "Nie ufaj osobom, które nie lubią muzyki.",
+            "Wszystko się ułoży, a jak nie, to chociaż będzie śmiesznie.",
+            "Wszechświat sugeruje: mniej scrollowania, więcej życia.",
+            "Dziś jest dzień, w którym nic nie musisz. Korzystaj.",
+            "Kawa, którą wypijesz, da Ci +10 do szybkości, ale -5 do celności.",
+            "Twoje skarpetki nie będą dziś do pary, ale to przyniesie szczęście.",
+            "Niech Moc będzie z Tobą... szczególnie na fizyce.",
+            "To co zgubiłeś, leży pod łóżkiem.",
+            "Zjedz coś słodkiego. Należy Ci się.",
+            "Nie bierz życia zbyt serio, i tak nie wyjdziesz z niego żywy.",
+            "Sprawdź, czy masz wyciszony telefon. Teraz."
         ];
 
-        function generujWrozbe() {
-            const wyswietlacz = document.getElementById('fortune-display');
+        window.onload = function() {
+            const display = document.getElementById('fortune-display');
             
-            // Prosta animacja znikania tekstu
-            wyswietlacz.style.opacity = 0;
-
+            // Losowanie bez powtórzeń w ramach jednej sesji (opcjonalne, tutaj po prostu full random)
+            const index = Math.floor(Math.random() * wrozby.length);
+            
+            // Symulacja "myślenia" przez ułamek sekundy dla efektu
             setTimeout(() => {
-                // Losowanie indeksu
-                const losowyIndex = Math.floor(Math.random() * wrozby.length);
-                
-                // Wstawienie tekstu
-                wyswietlacz.innerText = wrozby[losowyIndex];
-                
-                // Animacja pojawiania się
-                wyswietlacz.style.opacity = 1;
-            }, 300); // Czas musi pasować do transition w CSS (opcjonalnie można dodać w CSS)
-        }
-
-        // Dodanie płynnego przejścia dla opacity w JS (lub w CSS wyżej)
-        document.getElementById('fortune-display').style.transition = "opacity 0.3s ease";
-
-        // Wywołanie funkcji na starcie, żeby od razu była wróżba
-        window.onload = generujWrozbe;
+                display.innerText = wrozby[index];
+            }, 500);
+        };
     </script>
 
 </body>
 </html>
+

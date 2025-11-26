@@ -1,20 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twoja Wróżba na Dziś</title>
+    <title>Wyrocznia Ekonoma</title>
     <style>
         :root {
-            --primary-color: #4e54c8;
-            --secondary-color: #8f94fb;
+            /* Kolory dopasowane bardziej pod granat/błękit (częste w szkołach) */
+            --primary-color: #004e92;
+            --secondary-color: #000428;
+            --accent-color: #ffd700; /* Złoty akcent */
             --text-color: #333;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to left, #8f94fb, #4e54c8);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             height: 100vh;
             margin: 0;
             display: flex;
@@ -22,17 +23,31 @@
             align-items: center;
             color: var(--text-color);
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Tło z delikatnymi elementami (opcjonalne) */
+        body::before {
+            content: "ZSEiO";
+            position: absolute;
+            font-size: 15rem;
+            color: rgba(255, 255, 255, 0.03);
+            font-weight: bold;
+            z-index: 0;
+            transform: rotate(-30deg);
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.96);
             padding: 3rem 2rem;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             text-align: center;
             max-width: 600px;
             width: 85%;
             position: relative;
+            z-index: 1;
+            border: 2px solid var(--accent-color);
         }
 
         h1 {
@@ -40,27 +55,34 @@
             margin-bottom: 0.5rem;
             font-size: 1.8rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
         }
 
         .subtitle {
             color: #666;
             font-size: 0.9rem;
             margin-bottom: 2rem;
+            font-style: italic;
         }
 
         .fortune-box {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            min-height: 100px;
+            min-height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 20px 0;
             color: #2c3e50;
             line-height: 1.5;
-            opacity: 0; /* Start hidden for animation */
-            animation: fadeIn 2s forwards;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-color);
         }
 
         .icon {
@@ -72,20 +94,18 @@
 
         .footer-note {
             margin-top: 30px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #888;
-            font-style: italic;
         }
 
-        /* Animacje */
         @keyframes pulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(143, 148, 251, 0.5)); }
-            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px rgba(143, 148, 251, 0.8)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(143, 148, 251, 0.5)); }
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5)); }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -93,94 +113,80 @@
 <body>
 
     <div class="container">
-        <span class="icon">🔮</span>
-        <h1>Co mówi magiczna kula ekonoma na dziś?</h1>
-        <p class="subtitle">Twoja losowa przepowiednia na ten moment</p>
+        <span class="icon">🎓</span>
+        <h1>Wyrocznia Ekonoma</h1>
+        <p class="subtitle">Magia przemawia...</p>
         
         <div class="fortune-box" id="fortune-display">
-            Ładowanie
+            Łączenie z serwerem CKE...
         </div>
 
-        <div class="footer-note">Nie podoba się? Odśwież stronę, by spróbować oszukać przeznaczenie.</div>
+        <div class="footer-note">Nie pasuje wróżba? Odśwież stronę, aby oszukać przeznaczenie.</div>
     </div>
 
     <script>
-        // OGROMNA BAZA WRÓŻB (Szkoła, Życie, Miłość, Absurd)
         const wrozby = [
-            // SZKOŁA I MATURA
-            "Temat Twojej matury ustnej będzie banalnie prosty.",
-            "Nauczyciel, którego się boisz, zachoruje w dniu sprawdzianu.",
-            "Twoja wiedza z lektur okaże się zbędna, ale memy o nich uratują Ci życie towarzyskie.",
-            "Dostaniesz 30% na teście, strzelając. Czysty fart.",
-            "Zapomnisz pracy domowej, ale nauczyciel zapomni ją sprawdzić.",
-            "Nie przejmuj się ocenami, za 5 lat nikt o nie nie zapyta.",
-            "Wuefista w końcu doceni Twoje starania (albo przynajmniej obecność).",
-            "To, czego uczysz się teraz na pamięć, przyda Ci się tylko w teleturnieju.",
-            "Zdasz maturę z matematyki. Serio. Nie panikuj.",
-            "Unikaj pierwszej ławki w przyszły wtorek.",
-            
-            // RELACJE I MIŁOŚĆ
-            "Twój crush w końcu zauważy Twoją nową fryzurę.",
-            "Ktoś obserwuje Twoje relacje na Instagramie częściej niż myślisz.",
-            "Unikaj toksycznych ludzi, szczególnie tych, którzy nie lubią pizzy.",
-            "Wkrótce poznasz kogoś, kto ma tak samo dziwne poczucie humoru jak Ty.",
-            "Stara przyjaźń zostanie wystawiona na próbę, ale wyjdziecie z tego silniejsi.",
-            "Nie pisz do byłej/byłego. Po prostu nie. Odłóż telefon.",
-            "Ktoś planuje zaprosić Cię na studniówkę (lub randkę), ale zbiera się na odwagę.",
-            "Twoja sarkastyczna uwaga zostanie źle zrozumiana. Uważaj na słowa.",
-            
-            // ŻYCIE I SZCZĘŚCIE
-            "Znajdziesz zapomnianą dychę w kieszeni zimowej kurtki.",
-            "Jutrzejszy obiad będzie najlepszym posiłkiem tego tygodnia.",
-            "Twoja paczka z internetu przyjdzie dzień wcześniej.",
-            "Uważaj na kałuże. Jedna z nich jest głębsza niż wygląda.",
-            "To jest idealny moment, żeby zacząć ten serial, który wszyscy polecają.",
-            "Twój telefon rozładuje się w krytycznym momencie. Noś powerbanka.",
-            "Zrób sobie drzemkę. To najlepsza decyzja na dziś.",
-            "Wyjdziesz z domu i uświadomisz sobie, że wyglądasz świetnie.",
-            "Ktoś zrobi Ci zdjęcie z ukrycia i wyjdziesz na nim jak ziemniak. Trudno.",
-            "Czeka Cię nagły przypływ gotówki od babci.",
-            
-            // DECYZJE I PRZYSZŁOŚĆ
-            "Jeśli wahasz się między A i B – wybierz C.",
-            "Nie odkładaj tego na jutro. Jutrzejszy Ty będzie Ci wdzięczny.",
-            "Twoja intuicja działa dziś bezbłędnie. Słuchaj jej.",
-            "Zmiana, której się boisz, wyjdzie Ci na dobre.",
-            "Za rok będziesz śmiać się z tego, co dziś jest Twoim największym problemem.",
-            "To nie jest dobry dzień na eksperymenty z włosami.",
-            "Wyśpij się. Świat wygląda lepiej po 8 godzinach snu.",
-            "Planowanie przyszłości jest super, ale pamiętaj o zjedzeniu śniadania.",
-            
-            // ABSURDALNE I ZABAWNE
-            "Twoim zwierzęciem duchowym na ten tydzień jest leniwiec.",
-            "Uważaj na gołębie. Patrzą podejrzanie.",
-            "Gwiazdy mówią, że powinieneś zamówić kebaba.",
-            "Nie ufaj osobom, które nie lubią muzyki.",
-            "Wszystko się ułoży, a jak nie, to chociaż będzie śmiesznie.",
-            "Wszechświat sugeruje: mniej scrollowania, więcej życia.",
-            "Dziś jest dzień, w którym nic nie musisz. Korzystaj.",
-            "Kawa, którą wypijesz, da Ci +10 do szybkości, ale -5 do celności.",
-            "Twoje skarpetki nie będą dziś do pary, ale to przyniesie szczęście.",
-            "Niech Moc będzie z Tobą... szczególnie na fizyce.",
-            "To co zgubiłeś, leży pod łóżkiem.",
-            "Zjedz coś słodkiego. Należy Ci się.",
-            "Nie bierz życia zbyt serio, i tak nie wyjdziesz z niego żywy.",
-            "Sprawdź, czy masz wyciszony telefon. Teraz."
+            // --- ZSEiO & ELBLĄG ---
+            "Tramwaj, na który biegniesz po lekcjach, odjedzie równo z dzwonkiem.",
+            "Twoja droga na Bema będzie dziś wyjątkowo bezkorkowa.",
+            "Wuefista w końcu uwierzy, że naprawdę zapomniałeś stroju.",
+            "Spotkasz kogoś znajomego w drodze do Żabki na przerwie.",
+            "Ogrzewanie w sali będzie działać z mocą słońca, ubierz się na cebulkę.",
+            "Uważaj na schodach – grawitacja na Bema działa dzisiaj ze zdwojoną siłą.",
+            "Dziś jest dzień, w którym automat z kawą nie połknie Twoich drobnych.",
+            "Twoja frekwencja magicznie się poprawi w dzienniku elektronicznym.",
+            "Wyjdziesz ze szkoły i poczujesz ten specyficzny elbląski wiatr zmian.",
+
+            // --- EGZAMINY ZAWODOWE (OGÓLNE I PROFILOWE) ---
+            "Na egzaminie zawodowym trafisz na zadanie, które robiliście wczoraj.",
+            "Klucz odpowiedzi CKE będzie dla Ciebie łaskawy.",
+            "Twój bilans w końcu wyjdzie na zero. Aktywa = Pasywa. Cud!",
+            "Egzamin praktyczny zdasz na 75%. Idealnie na styk, ale zdane!",
+            "Komisja egzaminacyjna nie zauważy, że ręce Ci się trzęsą przy klawiaturze.",
+            "System egzaminacyjny się zawiesi, ale Twoje odpowiedzi zostaną zapisane.",
+            "Na teorii zaznaczysz 'B' i to będzie jedyna słuszna droga.",
+            "Paleta w zadaniu logistycznym ułoży się idealnie.",
+            "Twoja kampania reklamowa na egzaminie zachwyci wirtualnego klienta.",
+            "Program nie wyrzuci błędu w trakcie kompilacji na egzaminie. To rzadkość!",
+            "Zadanie z Excela rozwiążesz szybciej niż myślisz.",
+            "Nie bój się egzaminu ustnego. Egzaminator też człowiek, też chce iść do domu.",
+
+            // --- NAUKA I MATURA ---
+            "Matematyka przestanie być czarną magią dokładnie na 45 minut.",
+            "Unikaj wzroku nauczyciela od przedmiotów zawodowych. Dziś 'pyta'.",
+            "Twoja rozprawka będzie tak laniem wody, że aż temat popłynie, ale zdasz.",
+            "Lektura, której streszczenie przeczytasz 5 minut przed lekcją, będzie na kartkówce.",
+            "Dostaniesz 5 z przedmiotu, którego nazwy nawet nie potrafisz wymówić.",
+            "Twoja prezentacja w PowerPoincie odpali się za pierwszym razem.",
+
+            // --- ŻYCIE UCZNIA ---
+            "Kanapka z plecaka smakuje dziś lepiej niż kebab na mieście.",
+            "Znajdziesz długopis, który zgubiłeś w pierwszej klasie.",
+            "Ktoś z innej klasy uśmiechnie się do Ciebie na korytarzu.",
+            "Twoja bateria w telefonie wytrzyma do końca lekcji. Szok.",
+            "Dziś jest dobry dzień, żeby zgłosić nieprzygotowanie. Gwiazdy dają zielone światło.",
+            "Unikaj podejrzanych linków na grupie klasowej.",
+            "Weekend zacznie się dla Ciebie mentalnie już w czwartek.",
+            "Ktoś pożyczy od Ciebie kartkę i faktycznie ją odda.",
+            "Uważaj na 'darmowe' punkty na sprawdzianie. To pułapka.",
+            "Wychowawca zapomni sprawdzić usprawiedliwienia.",
+            "Zrozumiesz o co chodzi w podatkach. Przez chwilę."
         ];
 
         window.onload = function() {
             const display = document.getElementById('fortune-display');
             
-            // Losowanie bez powtórzeń w ramach jednej sesji (opcjonalne, tutaj po prostu full random)
+            // Losowanie
             const index = Math.floor(Math.random() * wrozby.length);
             
-            // Symulacja "myślenia" przez ułamek sekundy dla efektu
+            // Efekt ładowania
             setTimeout(() => {
                 display.innerText = wrozby[index];
-            }, 500);
+                // Dodatkowy efekt wizualny po załadowaniu tekstu
+                display.style.borderColor = "#ffd700";
+            }, 600);
         };
     </script>
 
 </body>
 </html>
-
